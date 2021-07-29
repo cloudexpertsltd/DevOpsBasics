@@ -24,3 +24,13 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(agent.builddirectory)'
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'warfile'
+    publishLocation: 'Container'
